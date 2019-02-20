@@ -35,7 +35,7 @@ Then configure the rules you want to use under the rules section.
 }
 ```
 
-You may auto-fix your source files, adding or updating a given license header:
+You may [auto-fix](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) your source files, adding or updating a given license header:
 
 ```sh
 eslint --fix .
