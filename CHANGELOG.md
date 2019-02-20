@@ -6,6 +6,10 @@ All notable changes to [eslint-plugin-license-header](https://github.com/nikku/e
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.1.1
+
+* `FIX`: correct `rules/header` to properly handle replacement of outdated licenses
+
 ## 0.1.0
 
 _Initial implementation._
