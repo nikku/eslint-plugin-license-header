@@ -7,7 +7,14 @@
     "eslintplugin",
     "eslint-plugin"
   ],
-  "author": "Nico Rehwaldt",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nikku/eslint-plugin-license-header.git"
+  },
+  "author": {
+    "name": "Nico Rehwaldt",
+    "url": "https://github.com/nikku"
+  },
   "main": "lib/index.js",
   "scripts": {
     "all": "run-s lint test",
