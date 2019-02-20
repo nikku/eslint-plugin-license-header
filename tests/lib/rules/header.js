@@ -4,12 +4,13 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
+const { expect } = require('chai');
+
 const fs = require('fs');
 
 const rule = require('../../../lib/rules/header');
 
-const { RuleTester } = require('eslint');
-
+const { Linter, RuleTester } = require('eslint');
 
 const licenseText = fs.readFileSync(__dirname + '/../../fixtures/license-header.js', 'utf-8');
 const licensePath = 'tests/fixtures/license-header.js';
@@ -109,18 +110,40 @@ ruleTester.run('header', rule, {
 });
 
 
-const { Linter } = require('eslint');
+describe('header', function() {
 
-const linter = new Linter();
+  const linter = new Linter();
 
-linter.defineRule('header', rule);
+  linter.defineRule('header', rule);
 
-const results = linter.verifyAndFix('exports = "FOO"', {
-  rules: {
-    header: [ 'error', licensePath ]
-  }
+
+  describe('error handling', function() {
+
+    it('should indicate invalid path option', function() {
+
+      expect(() => {
+        linter.verify('exports = "FOO"', {
+          rules: {
+            header: [ 'error', 'non-existing-path' ]
+          }
+        });
+      }).to.throw(/could not read license header from <non-existing-path>/);
+
+    });
+
+
+    it('should indicate missing oath option', function() {
+
+      expect(() => {
+        linter.verify('exports = "FOO"', {
+          rules: {
+            header: [ 'error' ]
+          }
+        });
+      }).to.throw(/missing license header path/);
+
+    });
+
+  });
+
 });
-
-console.log(results);
-
-console.log(results.output);
