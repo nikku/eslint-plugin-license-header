@@ -41,6 +41,17 @@ ruleTester.run('header', rule, {
 
   invalid: [
     {
+      code: "'use strict';\n\nmodule.exports = function() {};",
+      output: `${licenseText}\n\n'use strict';\n\nmodule.exports = function() {};`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Missing license header',
+          type: 'Program'
+        }
+      ]
+    },
+    {
       code: '/* some comment */\nmodule.exports = function() {};',
       output: `${licenseText}\n\n/* some comment */\nmodule.exports = function() {};`,
       options: [ licensePath ],
