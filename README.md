@@ -35,6 +35,13 @@ Then configure the rules you want to use under the rules section.
 }
 ```
 
+You may auto-fix your source files, adding or updating a given license header:
+
+```sh
+eslint --fix .
+```
+
+
 ## Supported Rules
 
 * [`license-header/header`](./docs/rules/header.md): checks a source file for the presence of a license header
