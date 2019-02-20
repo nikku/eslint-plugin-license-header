@@ -17,7 +17,6 @@ Assuming the file `./resources/license-header.js` contains the following content
  * This source code is licensed under the WTFPL license found in the
  * LICENSE file in the root of this projects source tree.
  */
-
 ```
 
 Examples of **incorrect** code for this rule:
