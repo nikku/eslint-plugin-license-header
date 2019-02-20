@@ -4,21 +4,22 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var fs = require('fs');
+const fs = require('fs');
 
-var rule = require('../../../lib/rules/header');
+const rule = require('../../../lib/rules/header');
 
-var RuleTester = require('eslint').RuleTester;
+const { RuleTester } = require('eslint');
 
 
-var licenseText = fs.readFileSync(__dirname + '/../../fixtures/license-header.js', 'utf-8');
-var licensePath = 'tests/fixtures/license-header.js';
+const licenseText = fs.readFileSync(__dirname + '/../../fixtures/license-header.js', 'utf-8');
+const licensePath = 'tests/fixtures/license-header.js';
+
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
+const ruleTester = new RuleTester();
 
 ruleTester.run('header', rule, {
 
@@ -30,12 +31,17 @@ ruleTester.run('header', rule, {
     {
       code: `#!/usr/bin/foo\n\n${licenseText}\n\n/** do this */\nmodule.exports = function() {};`,
       options: [ licensePath ]
+    },
+    {
+      code: `${licenseText}\n\nmodule.exports = function() {};`,
+      options: [ licensePath ]
     }
   ],
 
   invalid: [
     {
-      code: 'module.exports = function() {};',
+      code: '/* some comment */\nmodule.exports = function() {};',
+      output: `${licenseText}\n\n/* some comment */\nmodule.exports = function() {};`,
       options: [ licensePath ],
       errors: [
         {
@@ -46,6 +52,18 @@ ruleTester.run('header', rule, {
     },
     {
       code: 'module.exports = function() {};',
+      output: `${licenseText}\n\nmodule.exports = function() {};`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Missing license header',
+          type: 'Program'
+        }
+      ]
+    },
+    {
+      code: '\nmodule.exports = function() {};',
+      output: `${licenseText}\n\nmodule.exports = function() {};`,
       options: [ licensePath ],
       errors: [
         {
@@ -56,6 +74,7 @@ ruleTester.run('header', rule, {
     },
     {
       code: `${licenseText}\nmodule.exports = function() {};`,
+      output: `${licenseText}\n\nmodule.exports = function() {};`,
       options: [ licensePath ],
       errors: [
         {
@@ -65,17 +84,8 @@ ruleTester.run('header', rule, {
       ]
     },
     {
-      code: `${licenseText}\n\n\nmodule.exports = function() {};`,
-      options: [ licensePath ],
-      errors: [
-        {
-          message: 'Superfluous new lines after license header',
-          type: 'Block'
-        }
-      ]
-    },
-    {
       code: `\n${licenseText}\n\nmodule.exports = function() {};`,
+      output: `${licenseText}\n\nmodule.exports = function() {};`,
       options: [ licensePath ],
       errors: [
         {
@@ -86,6 +96,7 @@ ruleTester.run('header', rule, {
     },
     {
       code: `#!/foo/bar\n\n\n${licenseText}\n\nmodule.exports = function() {};`,
+      output: `#!/foo/bar\n\n${licenseText}\n\nmodule.exports = function() {};`,
       options: [ licensePath ],
       errors: [
         {
@@ -96,3 +107,20 @@ ruleTester.run('header', rule, {
     }
   ]
 });
+
+
+const { Linter } = require('eslint');
+
+const linter = new Linter();
+
+linter.defineRule('header', rule);
+
+const results = linter.verifyAndFix('exports = "FOO"', {
+  rules: {
+    header: [ 'error', licensePath ]
+  }
+});
+
+console.log(results);
+
+console.log(results.output);
