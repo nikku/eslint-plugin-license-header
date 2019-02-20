@@ -1,5 +1,7 @@
 # eslint-plugin-license-header
 
+[![Build Status](https://travis-ci.com/nikku/eslint-plugin-license-header.svg?branch=master)](https://travis-ci.com/nikku/eslint-plugin-license-header)
+
 Rules to validate the presence of license headers in your project.
 
 
