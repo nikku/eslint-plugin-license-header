@@ -37,7 +37,7 @@ Then configure the rules you want to use under the rules section.
 
 ## Supported Rules
 
-* `license-header/header`: ensure that a give license header is present in all your source files
+* [`license-header/header`](./docs/rules/header.md): checks a source file for the presence of a license header
 
 
 ## License
