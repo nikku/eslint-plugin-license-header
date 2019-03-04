@@ -123,12 +123,34 @@ ruleTester.run('header', rule, {
       ]
     },
     {
+      code: `${licenseText}\n\n\nmodule.exports = function() {};`,
+      output: `${licenseText}\n\nmodule.exports = function() {};`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Superfluous new lines after license header',
+          type: 'Block'
+        }
+      ]
+    },
+    {
       code: `\n${licenseText}\n\nmodule.exports = function() {};`,
       output: `${licenseText}\n\nmodule.exports = function() {};`,
       options: [ licensePath ],
       errors: [
         {
           message: 'Superfluous new lines before license header',
+          type: 'Block'
+        }
+      ]
+    },
+    {
+      code: `#!/foo/bar\n${licenseText}\n\nmodule.exports = function() {};`,
+      output: `#!/foo/bar\n\n${licenseText}\n\nmodule.exports = function() {};`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Missing new line before license header',
           type: 'Block'
         }
       ]
@@ -147,6 +169,17 @@ ruleTester.run('header', rule, {
     {
       code: "'use strict';\r\n\r\nmodule.exports = function() {};",
       output: `${licenseTextWin}\r\n\r\n'use strict';\r\n\r\nmodule.exports = function() {};`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Missing license header',
+          type: 'Program'
+        }
+      ]
+    },
+    {
+      code: '#!/foo/bar\n\nmodule.exports = function() {};',
+      output: `#!/foo/bar\n\n${licenseText}\n\nmodule.exports = function() {};`,
       options: [ licensePath ],
       errors: [
         {
