@@ -17,6 +17,9 @@ const licensePath = 'tests/fixtures/license-header.js';
 
 const invalidLicenseText = licenseText.replace(' Foo Corp.', ' Fooooo Corp.');
 
+const licenseTextWin = fs.readFileSync(__dirname + '/../../fixtures/license-header-win.js', 'utf-8');
+const licensePathWin = 'tests/fixtures/license-header-win.js';
+
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
@@ -28,6 +31,18 @@ ruleTester.run('header', rule, {
   valid: [
     {
       code: `${licenseText}\n\n/** do this */\nmodule.exports = function() {};`,
+      options: [ licensePath ]
+    },
+    {
+      code: `${licenseText}\n\n/** do this */\nmodule.exports = function() {};`,
+      options: [ licensePathWin ]
+    },
+    {
+      code: `${licenseText}\r\n\r\n/** do this */\r\nmodule.exports = function() {};`,
+      options: [ licensePathWin ]
+    },
+    {
+      code: `${licenseText}\r\n\r\n/** do this */\r\nmodule.exports = function() {};`,
       options: [ licensePath ]
     },
     {
@@ -125,6 +140,39 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Superfluous new lines before license header',
+          type: 'Block'
+        }
+      ]
+    },
+    {
+      code: "'use strict';\r\n\r\nmodule.exports = function() {};",
+      output: `${licenseTextWin}\r\n\r\n'use strict';\r\n\r\nmodule.exports = function() {};`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Missing license header',
+          type: 'Program'
+        }
+      ]
+    },
+    {
+      code: `#!/foo/bar\n\n\n${invalidLicenseText}\n\nmodule.exports = function() {};`,
+      output: `#!/foo/bar\n\n\n${licenseText}\n\nmodule.exports = function() {};`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Invalid license header',
+          type: 'Block'
+        }
+      ]
+    },
+    {
+      code: `#!/foo/bar\n\n\n${licenseTextWin}\n\nmodule.exports = function() {};`,
+      output: `#!/foo/bar\n\n\n${licenseText}\n\nmodule.exports = function() {};`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Invalid license header',
           type: 'Block'
         }
       ]
