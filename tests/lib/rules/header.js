@@ -57,6 +57,28 @@ ruleTester.run('header', rule, {
 
   invalid: [
     {
+      code: '\n',
+      output: `${licenseText}\n\n\n`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Missing license header',
+          type: 'Program'
+        }
+      ]
+    },
+    {
+      code: '\n\n',
+      output: `${licenseText}\n\n\n\n`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Missing license header',
+          type: 'Program'
+        }
+      ]
+    },
+    {
       code: `${invalidLicenseText}\n\nmodule.exports = function() {};`,
       output: `${licenseText}\n\nmodule.exports = function() {};`,
       options: [ licensePath ],
