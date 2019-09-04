@@ -52,13 +52,39 @@ ruleTester.run('header', rule, {
     {
       code: `${licenseText}\n\nmodule.exports = function() {};`,
       options: [ licensePath ]
+    },
+    {
+      code: `${licenseText}\n\n\n\n`,
+      options: [ licensePath ]
     }
   ],
 
   invalid: [
     {
+      code: '// HELLO WORLD',
+      output: `${licenseText}\n\n// HELLO WORLD`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Missing license header',
+          type: 'Line'
+        }
+      ]
+    },
+    {
+      code: '/* HELLO WORLD */',
+      output: `${licenseText}\n\n/* HELLO WORLD */`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Missing license header',
+          type: 'Block'
+        }
+      ]
+    },
+    {
       code: '\n',
-      output: `${licenseText}\n\n\n`,
+      output: `${licenseText}\n\n`,
       options: [ licensePath ],
       errors: [
         {
@@ -69,7 +95,7 @@ ruleTester.run('header', rule, {
     },
     {
       code: '\n\n',
-      output: `${licenseText}\n\n\n\n`,
+      output: `${licenseText}\n\n`,
       options: [ licensePath ],
       errors: [
         {
@@ -96,7 +122,7 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'Program'
+          type: 'ExpressionStatement'
         }
       ]
     },
@@ -107,7 +133,7 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'Program'
+          type: 'Block'
         }
       ]
     },
@@ -118,7 +144,7 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'Program'
+          type: 'ExpressionStatement'
         }
       ]
     },
@@ -129,7 +155,7 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'Program'
+          type: 'ExpressionStatement'
         }
       ]
     },
@@ -195,7 +221,7 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'Program'
+          type: 'ExpressionStatement'
         }
       ]
     },
@@ -206,7 +232,7 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'Program'
+          type: 'Shebang'
         }
       ]
     },
