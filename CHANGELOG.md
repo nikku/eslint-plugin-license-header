@@ -6,6 +6,10 @@ All notable changes to [eslint-plugin-license-header](https://github.com/nikku/e
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.1.3
+
+* `FIX`: correct `eslint@5+` error when checking empty files
+
 ## 0.1.2
 
 * `FIX`: check and add license using existing line separator ([#1](https://github.com/nikku/eslint-plugin-license-header/issues/1))
