@@ -18,9 +18,10 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "all": "run-s lint test",
+    "all": "run-s lint test:coverage",
     "lint": "eslint .",
-    "test": "nyc --reporter lcov --exclude \"tests/**\" mocha tests --recursive"
+    "test:coverage": "nyc --reporter lcov --exclude \"tests/**\" mocha tests --recursive",
+    "test": "mocha tests --recursive"
   },
   "dependencies": {
     "requireindex": "~1.1.0"
