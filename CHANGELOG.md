@@ -6,6 +6,10 @@ All notable changes to [eslint-plugin-license-header](https://github.com/nikku/e
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.2.1
+
+* `CHORE`: limit amout of published files
+
 ## 0.2.0
 
 * `FEAT`: completely replace whitespace only file contents when adding license
