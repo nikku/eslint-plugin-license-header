@@ -1,6 +1,6 @@
 # eslint-plugin-license-header
 
-[![Build Status](https://travis-ci.com/nikku/eslint-plugin-license-header.svg?branch=master)](https://travis-ci.com/nikku/eslint-plugin-license-header)
+[![CI](https://github.com/nikku/eslint-plugin-license-header/actions/workflows/CI.yml/badge.svg)](https://github.com/nikku/eslint-plugin-license-header/actions/workflows/CI.yml)
 [![Code coverage](https://img.shields.io/codecov/c/github/nikku/eslint-plugin-license-header.svg)](https://codecov.io/gh/nikku/eslint-plugin-license-header)
 
 Rules to validate the presence of license headers in source files.
