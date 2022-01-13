@@ -14,6 +14,7 @@ const { Linter, RuleTester } = require('eslint');
 
 const licenseText = fs.readFileSync(__dirname + '/../../fixtures/license-header.js', 'utf-8');
 const licensePath = 'tests/fixtures/license-header.js';
+const licenceWhitespacePath = 'tests/fixtures/license-header-whitespace.js';
 
 const invalidLicenseText = licenseText.replace(' Foo Corp.', ' Fooooo Corp.');
 
@@ -32,6 +33,10 @@ ruleTester.run('header', rule, {
     {
       code: `${licenseText}\n\n/** do this */\nmodule.exports = function() {};`,
       options: [ licensePath ]
+    },
+    {
+      code: `${licenseText}\n\n/** do this */\nmodule.exports = function() {};`,
+      options: [ licenceWhitespacePath ]
     },
     {
       code: `${licenseText}\n\n/** do this */\nmodule.exports = function() {};`,
@@ -251,6 +256,17 @@ ruleTester.run('header', rule, {
       code: `#!/foo/bar\n\n\n${licenseTextWin}\n\nmodule.exports = function() {};`,
       output: `#!/foo/bar\n\n\n${licenseText}\n\nmodule.exports = function() {};`,
       options: [ licensePath ],
+      errors: [
+        {
+          message: 'Invalid license header',
+          type: 'Block'
+        }
+      ]
+    },
+    {
+      code: `${invalidLicenseText}\n\nmodule.exports = function() {};`,
+      output: `${licenseText}\n\nmodule.exports = function() {};`,
+      options: [ licenceWhitespacePath ],
       errors: [
         {
           message: 'Invalid license header',
