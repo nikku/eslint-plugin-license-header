@@ -8,7 +8,8 @@ This rule validates the presence of a license header
 This rule aims to support you by ensuring that all files in your project
 have a uniform license header.
 
-Assuming the file `./resources/license-header.js` contains the following contents (no newline at the end of file):
+Assuming the file `./resources/license-header.js` contains the following contents
+(whitespace such as newlines will be trimmed before and after the comment):
 
 ```javascript
 /**

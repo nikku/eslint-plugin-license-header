@@ -14,6 +14,7 @@ const { Linter, RuleTester } = require('eslint');
 
 const licenseText = fs.readFileSync(__dirname + '/../../fixtures/license-header.js', 'utf-8');
 const licensePath = 'tests/fixtures/license-header.js';
+const licensePathWithBlank = 'tests/fixtures/license-header-blank-line-at-end.js';
 
 const invalidLicenseText = licenseText.replace(' Foo Corp.', ' Fooooo Corp.');
 
@@ -32,6 +33,10 @@ ruleTester.run('header', rule, {
     {
       code: `${licenseText}\n\n/** do this */\nmodule.exports = function() {};`,
       options: [ licensePath ]
+    },
+    {
+      code: `${licenseText}\n\n/** do this */\nmodule.exports = function() {};`,
+      options: [ licensePathWithBlank ]
     },
     {
       code: `${licenseText}\n\n/** do this */\nmodule.exports = function() {};`,
