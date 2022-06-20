@@ -21,6 +21,9 @@ const invalidLicenseText = licenseText.replace(' Foo Corp.', ' Fooooo Corp.');
 const licenseTextWin = fs.readFileSync(__dirname + '/../../fixtures/license-header-win.js', 'utf-8');
 const licensePathWin = 'tests/fixtures/license-header-win.js';
 
+const arrayLicense = require('../../fixtures/license-header-array');
+const arrayLicenseText = arrayLicense.join('\n');
+
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
@@ -28,7 +31,6 @@ const licensePathWin = 'tests/fixtures/license-header-win.js';
 const ruleTester = new RuleTester();
 
 ruleTester.run('header', rule, {
-
   valid: [
     {
       code: `${licenseText}\n\n/** do this */\nmodule.exports = function() {};`,
@@ -59,8 +61,12 @@ ruleTester.run('header', rule, {
       options: [ licensePath ]
     },
     {
-      code: `${licenseText}\n\n\n\n`,
+      code: `${licenseText}\n\nmodule.exports = function() {};`,
       options: [ licensePath ]
+    },
+    {
+      code: `${arrayLicenseText}\n\nmodule.exports = function() {};`,
+      options: [ arrayLicense ]
     }
   ],
 
