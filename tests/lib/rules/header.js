@@ -31,6 +31,7 @@ const arrayLicenseText = arrayLicense.join('\n');
 const ruleTester = new RuleTester();
 
 ruleTester.run('header', rule, {
+
   valid: [
     {
       code: `${licenseText}\n\n/** do this */\nmodule.exports = function() {};`,
