@@ -61,7 +61,7 @@ ruleTester.run('header', rule, {
       options: [ licensePath ]
     },
     {
-      code: `${licenseText}\n\nmodule.exports = function() {};`,
+      code: `${licenseText}\n\n\n\n`,
       options: [ licensePath ]
     },
     {
