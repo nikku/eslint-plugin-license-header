@@ -23,4 +23,4 @@ jobs:
     - name: Build
       run: npm run all
     - name: Upload Coverage
-      run: npx codecov
+      uses: codecov/codecov-action@v2
