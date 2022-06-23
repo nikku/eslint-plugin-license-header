@@ -8,6 +8,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         node-version: [14.x]
+        eslint-version: [ '', 7 ]
 
     steps:
     - name: Checkout
@@ -18,8 +19,10 @@ jobs:
         node-version: ${{matrix.node-version}}
     - name: Install dependencies
       run: npm ci
-    - name: Build
-      run: npm run all
+    - name: Install eslint@${{ matrix.eslint-version }}
+      if: matrix.eslint-version != ''
+      run: |
+        npm install eslint@${{ matrix.eslint-version }}
     - name: Build
       run: npm run all
     - name: Upload Coverage
