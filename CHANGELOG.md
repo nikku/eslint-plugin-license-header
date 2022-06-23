@@ -6,6 +6,10 @@ All notable changes to [eslint-plugin-license-header](https://github.com/nikku/e
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.6.0
+
+* `FEAT`: make ESLint@8 compatible
+
 ## 0.5.0
 
 * `FEAT`: add ability to provide header via configuration ([#11](https://github.com/nikku/eslint-plugin-license-header/pull/11))
