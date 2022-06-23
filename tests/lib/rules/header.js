@@ -95,6 +95,17 @@ ruleTester.run('header', rule, {
       ]
     },
     {
+      code: '',
+      output: `${licenseText}\n\n`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Missing license header',
+          type: 'Program'
+        }
+      ]
+    },
+    {
       code: '\n',
       output: `${licenseText}\n\n`,
       options: [ licensePath ],
