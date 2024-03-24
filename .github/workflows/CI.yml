@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [14.x]
+        node-version: [ 20 ]
         eslint-version: [ '', 7 ]
 
     steps:
