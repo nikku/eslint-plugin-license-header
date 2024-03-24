@@ -4,6 +4,8 @@ All notable changes to [eslint-plugin-license-header](https://github.com/nikku/e
 
 ## Unreleased
 
+* `CHORE`: Create test cases for Vue SFC file
+
 ___Note:__ Yet to be released changes appear here._
 
 ## 0.6.0

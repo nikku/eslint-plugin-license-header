@@ -22,7 +22,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test:coverage": "nyc --reporter lcov --exclude \"tests/**\" mocha tests --recursive",
-    "test": "mocha tests --recursive"
+    "test": "mocha tests --recursive --watch"
   },
   "dependencies": {
     "requireindex": "^1.2.0"
