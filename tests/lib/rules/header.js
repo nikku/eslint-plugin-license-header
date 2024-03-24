@@ -296,6 +296,48 @@ ruleTester.run('header', rule, {
 });
 
 
+const vueComponent = fs.readFileSync(__dirname + '/../../fixtures/component.vue', 'utf-8');
+
+const vueRuleTester = new RuleTester({
+  parser: require.resolve('vue-eslint-parser'),
+  parserOptions: {
+    'sourceType': 'module'
+  }
+});
+
+vueRuleTester.run('header', rule, {
+  valid: [
+    {
+      code: vueComponent,
+      output: vueComponent,
+      options: [ licensePath ]
+    }
+  ],
+  invalid: []
+});
+
+
+const svelteComponent = fs.readFileSync(__dirname + '/../../fixtures/component.svelte', 'utf-8');
+
+const svelteRuleTester = new RuleTester({
+  parser: require.resolve('svelte-eslint-parser'),
+  parserOptions: {
+    'sourceType': 'module'
+  }
+});
+
+svelteRuleTester.run('header', rule, {
+  valid: [
+    {
+      code: svelteComponent,
+      output: svelteComponent,
+      options: [ licensePath ]
+    }
+  ],
+  invalid: []
+});
+
+
 describe('header', function() {
 
   const linter = new Linter();
