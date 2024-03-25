@@ -6,6 +6,10 @@ All notable changes to [eslint-plugin-license-header](https://github.com/nikku/e
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.6.1
+
+* `FIX`: play nicely with Svelte and Vue components ([#16](https://github.com/nikku/eslint-plugin-license-header/pull/16), [#6](https://github.com/nikku/eslint-plugin-license-header/issue/6))
+
 ## 0.6.0
 
 * `FEAT`: make ESLint@8 compatible
