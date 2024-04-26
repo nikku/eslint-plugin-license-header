@@ -46,7 +46,7 @@ Alternatively, specify the license header as raw text:
           "/***********************************************",
           " * Copyright My Company",
           " * Copyright " + new Date().getFullYear(),
-          "***********************************************/",
+          " ***********************************************/",
       ]
     ]
   }
