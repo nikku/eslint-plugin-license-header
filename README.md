@@ -36,6 +36,34 @@ Then configure the rules you want to use under the rules section.
 }
 ```
 
+
+## Array license
+```js
+"license-header/header": [
+    "error",
+    [
+        "/***********************************************",
+        " * Copyright My Company",
+        ` * Copyright ${new Date().getFullYear()}`,
+        "***********************************************/",
+
+    ],
+```
+
+
+## Usage Flat Config
+
+```js
+import licenseHeader from "eslint-plugin-license-header";
+// ...
+        plugins: {
+            "license-header": licenseHeader,
+        // ...
+        },
+```
+
+
+
 You may [auto-fix](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) your source files, adding or updating a given license header:
 
 ```sh
