@@ -5,13 +5,11 @@
 
 Rules to validate the presence of license headers in source files.
 
-
 ## Installation
 
 ```sh
 npm install eslint-plugin-license-header --save-dev
 ```
-
 
 ## Usage
 
@@ -25,8 +23,9 @@ Add `license-header` to the plugins section of your `.eslintrc` configuration fi
 }
 ```
 
+### Header configuration
 
-Then configure the rules you want to use under the rules section.
+Enable the rule in the `rules` section of your configuration file and specify the license header template as a path:
 
 ```json
 {
@@ -36,17 +35,56 @@ Then configure the rules you want to use under the rules section.
 }
 ```
 
+Alternatively, specify the license header as raw text:
+
+```js
+{
+  "rules": {
+    "license-header/header": [
+      "error",
+      [
+          "/***********************************************",
+          " * Copyright My Company",
+          ` * Copyright ${new Date().getFullYear()}`,
+          "***********************************************/",
+  
+      ]
+    ]
+  }
+}
+```
+
+### Flat config
+
+In `eslint@9` you can consume the library using a flat configuration, too:
+
+```js
+import licenseHeader from "eslint-plugin-license-header";
+
+export default [
+  {
+    files: '**/*.js',
+    plugins: {
+      'license-header': licenseHeader
+    },
+    rules: [
+      "license-header/header": ...
+    ]
+  }
+];
+```
+
+### Autofix
+
 You may [auto-fix](https://eslint.org/docs/user-guide/command-line-interface#fixing-problems) your source files, adding or updating a given license header:
 
 ```sh
 eslint --fix .
 ```
 
-
-## Supported Rules
+## Supported rules
 
 * [`license-header/header`](./docs/rules/header.md): checks a source file for the presence of a license header
-
 
 ## License
 
