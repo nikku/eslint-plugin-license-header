@@ -25,7 +25,7 @@ Add `license-header` to the plugins section of your `.eslintrc` configuration fi
 
 ### Header configuration
 
-Enable the rule in the `rules` section of your configuration file and specify the license header template as a path:
+When enabling the rule specify the license header template as a path:
 
 ```json
 {
