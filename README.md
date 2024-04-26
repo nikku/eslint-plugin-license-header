@@ -67,9 +67,9 @@ export default [
     plugins: {
       'license-header': licenseHeader
     },
-    rules: [
+    rules: {
       "license-header/header": ...
-    ]
+    }
   }
 ];
 ```
