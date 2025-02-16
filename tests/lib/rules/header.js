@@ -33,6 +33,12 @@ const spdxLicense = [
 
 const spdxLicenseText = spdxLicense.join('\n');
 
+const singleLine = [
+  '// Copyright Foobar. All Rights Reserved.'
+];
+
+const singleLineText = singleLine.join('\n');
+
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
@@ -81,6 +87,10 @@ ruleTester.run('header', rule, {
     {
       code: `${spdxLicenseText}\n\nmodule.exports = function() {};`,
       options: [ spdxLicense ]
+    },
+    {
+      code: `${singleLineText}\n\nmodule.exports = function() {};`,
+      options: [ singleLine ]
     }
   ],
 
