@@ -24,6 +24,15 @@ const licensePathWin = 'tests/fixtures/license-header-win.js';
 const arrayLicense = require('../../fixtures/license-header-array');
 const arrayLicenseText = arrayLicense.join('\n');
 
+// simple Apache-2.0 SPDX license header
+const spdxLicense = [
+  '/**',
+  ' * @license SPDX-License-Identifier: Apache-2.0',
+  ' */'
+];
+
+const spdxLicenseText = spdxLicense.join('\n');
+
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
@@ -68,6 +77,10 @@ ruleTester.run('header', rule, {
     {
       code: `${arrayLicenseText}\n\nmodule.exports = function() {};`,
       options: [ arrayLicense ]
+    },
+    {
+      code: `${spdxLicenseText}\n\nmodule.exports = function() {};`,
+      options: [ spdxLicense ]
     }
   ],
 
