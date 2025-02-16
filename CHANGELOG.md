@@ -6,6 +6,10 @@ All notable changes to [eslint-plugin-license-header](https://github.com/nikku/e
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.7.0
+
+* `FEAT`: recognize `@license` annotated headers ([#19](https://github.com/nikku/eslint-plugin-license-header/issues/19))
+
 ## 0.6.1
 
 * `FIX`: play nicely with Svelte and Vue components ([#16](https://github.com/nikku/eslint-plugin-license-header/pull/16), [#6](https://github.com/nikku/eslint-plugin-license-header/issue/6))
