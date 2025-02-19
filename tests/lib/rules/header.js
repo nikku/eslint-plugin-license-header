@@ -35,7 +35,7 @@ const spdxLicenseText = spdxLicense.join('\n');
 
 const spdxLicenseDoubleSlash = [
   '// SPDX-License-Identifier: Apache-2.0'
-]
+];
 
 const spdxLicenseDoubleSlashText = spdxLicenseDoubleSlash.join('\n');
 
