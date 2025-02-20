@@ -33,6 +33,12 @@ const spdxLicense = [
 
 const spdxLicenseText = spdxLicense.join('\n');
 
+const spdxLicenseDoubleSlash = [
+  '// SPDX-License-Identifier: Apache-2.0'
+];
+
+const spdxLicenseDoubleSlashText = spdxLicenseDoubleSlash.join('\n');
+
 const singleLine = [
   '// Copyright Foobar. All Rights Reserved.'
 ];
@@ -87,6 +93,10 @@ ruleTester.run('header', rule, {
     {
       code: `${spdxLicenseText}\n\nmodule.exports = function() {};`,
       options: [ spdxLicense ]
+    },
+    {
+      code: `${spdxLicenseDoubleSlashText}\n\nmodule.exports = function() {};`,
+      options: [ spdxLicenseDoubleSlash ]
     },
     {
       code: `${singleLineText}\n\nmodule.exports = function() {};`,
