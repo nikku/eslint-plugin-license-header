@@ -371,6 +371,27 @@ svelteRuleTester.run('header', rule, {
 });
 
 
+const astroComponent = fs.readFileSync(__dirname + '/../../fixtures/component.astro', 'utf-8');
+
+const astroRuleTester = new RuleTester({
+  parser: require.resolve('astro-eslint-parser'),
+  parserOptions: {
+    'sourceType': 'module'
+  }
+});
+
+astroRuleTester.run('header', rule, {
+  valid: [
+    {
+      code: astroComponent,
+      output: astroComponent,
+      options: [ licensePath ]
+    }
+  ],
+  invalid: []
+});
+
+
 describe('header', function() {
 
   const linter = new Linter();
