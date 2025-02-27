@@ -28,6 +28,7 @@
     "requireindex": "^1.2.0"
   },
   "devDependencies": {
+    "astro-eslint-parser": "^1.2.1",
     "chai": "^4.4.1",
     "eslint": "^8.57.0",
     "eslint-plugin-bpmn-io": "^1.0.0",
