@@ -112,7 +112,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'Line'
+          line: 1,
+          column: 1
         }
       ]
     },
@@ -123,7 +124,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'Block'
+          line: 1,
+          column: 1
         }
       ]
     },
@@ -134,7 +136,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'Program'
+          line: 1,
+          column: 1
         }
       ]
     },
@@ -145,7 +148,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'Program'
+          line: 1,
+          column: 1
         }
       ]
     },
@@ -156,7 +160,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'Program'
+          line: 1,
+          column: 1
         }
       ]
     },
@@ -167,7 +172,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Invalid license header',
-          type: 'Block'
+          line: 1,
+          column: 1
         }
       ]
     },
@@ -178,7 +184,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'ExpressionStatement'
+          line: 1,
+          column: 1
         }
       ]
     },
@@ -189,7 +196,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'Block'
+          line: 1,
+          column: 1
         }
       ]
     },
@@ -200,7 +208,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'ExpressionStatement'
+          line: 1,
+          column: 1
         }
       ]
     },
@@ -211,7 +220,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'ExpressionStatement'
+          line: 2,
+          column: 1
         }
       ]
     },
@@ -222,7 +232,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing new line after license header',
-          type: 'Block'
+          line: 6,
+          column: 4
         }
       ]
     },
@@ -233,7 +244,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Superfluous new lines after license header',
-          type: 'Block'
+          line: 6,
+          column: 4
         }
       ]
     },
@@ -244,7 +256,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Superfluous new lines before license header',
-          type: 'Block'
+          line: 2,
+          column: 1
         }
       ]
     },
@@ -255,7 +268,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing new line before license header',
-          type: 'Block'
+          line: 2,
+          column: 1
         }
       ]
     },
@@ -266,7 +280,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Superfluous new lines before license header',
-          type: 'Block'
+          line: 4,
+          column: 1
         }
       ]
     },
@@ -277,7 +292,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'ExpressionStatement'
+          line: 1,
+          column: 1
         }
       ]
     },
@@ -288,7 +304,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Missing license header',
-          type: 'Shebang'
+          line: 1,
+          column: 1
         }
       ]
     },
@@ -299,7 +316,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Invalid license header',
-          type: 'Block'
+          line: 4,
+          column: 1
         }
       ]
     },
@@ -310,7 +328,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Invalid license header',
-          type: 'Block'
+          line: 4,
+          column: 1
         }
       ]
     },
@@ -321,7 +340,8 @@ ruleTester.run('header', rule, {
       errors: [
         {
           message: 'Invalid license header',
-          type: 'Block'
+          line: 1,
+          column: 1
         }
       ]
     }
@@ -342,7 +362,6 @@ vueRuleTester.run('header', rule, {
   valid: [
     {
       code: vueComponent,
-      output: vueComponent,
       options: [ licensePath ]
     }
   ],
@@ -363,7 +382,6 @@ svelteRuleTester.run('header', rule, {
   valid: [
     {
       code: svelteComponent,
-      output: svelteComponent,
       options: [ licensePath ]
     }
   ],
@@ -373,21 +391,27 @@ svelteRuleTester.run('header', rule, {
 
 describe('header', function() {
 
-  const linter = new Linter({ configType: 'eslintrc' });
-
-  linter.defineRule('header', rule);
-
+  const linter = new Linter();
 
   describe('error handling', function() {
 
     it('should indicate invalid path option', function() {
 
       expect(() => {
-        linter.verify('exports = "FOO"', {
-          rules: {
-            header: [ 'error', 'non-existing-path' ]
+        linter.verify('exports = "FOO"', [
+          {
+            plugins: {
+              'license-header': {
+                rules: {
+                  header: rule
+                }
+              }
+            },
+            rules: {
+              'license-header/header': [ 'error', 'non-existing-path' ]
+            }
           }
-        });
+        ]);
       }).to.throw(/could not read license header from <non-existing-path>/);
 
     });
@@ -396,11 +420,20 @@ describe('header', function() {
     it('should indicate missing oath option', function() {
 
       expect(() => {
-        linter.verify('exports = "FOO"', {
-          rules: {
-            header: [ 'error' ]
+        linter.verify('exports = "FOO"', [
+          {
+            plugins: {
+              'license-header': {
+                rules: {
+                  header: rule
+                }
+              }
+            },
+            rules: {
+              'license-header/header': [ 'error' ]
+            }
           }
-        });
+        ]);
       }).to.throw(/missing license header path/);
 
     });
