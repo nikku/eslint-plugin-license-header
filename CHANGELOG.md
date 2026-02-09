@@ -6,6 +6,11 @@ All notable changes to [eslint-plugin-license-header](https://github.com/nikku/e
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.9.0
+
+* `FEAT`: support `eslint@10`
+* `CHORE`: mark as compatible with `eslint@9` and `eslint@10`
+
 ## 0.8.0
 
 * `FEAT`: recognize `SPDX-License-Identifier` headers ([#21](https://github.com/nikku/eslint-plugin-license-header/pull/21))
