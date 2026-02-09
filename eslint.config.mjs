@@ -42,7 +42,7 @@ export default [
 
     return {
       ...config,
-      files: files.test,
+      files: files.test
     };
   }),
 
