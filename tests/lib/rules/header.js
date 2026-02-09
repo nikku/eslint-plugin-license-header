@@ -332,9 +332,9 @@ ruleTester.run('header', rule, {
 const vueComponent = fs.readFileSync(__dirname + '/../../fixtures/component.vue', 'utf-8');
 
 const vueRuleTester = new RuleTester({
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: {
-    'sourceType': 'module'
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
+    sourceType: 'module'
   }
 });
 
@@ -353,9 +353,9 @@ vueRuleTester.run('header', rule, {
 const svelteComponent = fs.readFileSync(__dirname + '/../../fixtures/component.svelte', 'utf-8');
 
 const svelteRuleTester = new RuleTester({
-  parser: require.resolve('svelte-eslint-parser'),
-  parserOptions: {
-    'sourceType': 'module'
+  languageOptions: {
+    parser: require('svelte-eslint-parser').default,
+    sourceType: 'module'
   }
 });
 
@@ -373,7 +373,7 @@ svelteRuleTester.run('header', rule, {
 
 describe('header', function() {
 
-  const linter = new Linter();
+  const linter = new Linter({ configType: 'eslintrc' });
 
   linter.defineRule('header', rule);
 
