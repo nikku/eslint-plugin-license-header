@@ -40,5 +40,8 @@
   },
   "files": [
     "lib"
-  ]
+  ],
+  "peerDependencies": {
+    "eslint": "^9 || ^10"
+  }
 }
