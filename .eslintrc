@@ -1,6 +1,0 @@
-{
-  "extends": "plugin:bpmn-io/recommended",
-  "env": {
-    "node": true
-  }
-}
