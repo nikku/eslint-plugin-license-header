@@ -28,6 +28,7 @@
     "requireindex": "^1.2.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "chai": "^6.2.2",
     "eslint": "^10.0.0",
     "eslint-plugin-bpmn-io": "^2.2.0",

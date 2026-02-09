@@ -46,6 +46,15 @@ export default [
     };
   }),
 
+  {
+    files: files.test,
+    rules: {
+      'mocha/no-async-describe': 'off',
+      'mocha/no-mocha-arrows': 'off',
+      'mocha/consistent-spacing-between-blocks': 'off'
+    }
+  },
+
   // all files
   {
     files: [ '**/*.js' ],
