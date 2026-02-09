@@ -7,8 +7,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [ 20 ]
         eslint-version: [ '' ]
+        node-version: [ 24 ]
 
     steps:
     - name: Checkout
