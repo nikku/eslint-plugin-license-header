@@ -101,6 +101,27 @@ ruleTester.run('header', rule, {
     {
       code: `${singleLineText}\n\nmodule.exports = function() {};`,
       options: [ singleLine ]
+    },
+    {
+      code: `/**
+ * Copyright Foo Corp., Bar Corp.
+ * This is licensed under the WTFPL. See the LICENSE file.
+ */
+
+module.exports = function() {};`,
+      options: [
+        [
+          '/**',
+          ' * Copyright (c) Foo Corp.',
+          ' * This is licensed under the WTFPL. See the LICENSE file.',
+          ' */'
+        ],
+        {
+          allowedHeaderPatterns: [
+            /^\/\*\*\n \* Copyright Foo Corp.(, .+)*\n \* This is licensed under the WTFPL. See the LICENSE file.\n \*\/$/,
+          ]
+        }
+      ]
     }
   ],
 
