@@ -79,6 +79,18 @@ ruleTester.run('header', rule, {
       options: [ licensePath ]
     },
     {
+      code: `#!/usr/bin/foo\n\n${licenseText}\n\nmodule.exports = function() {};`,
+      options: [ licensePath ]
+    },
+    {
+      code: `#!/usr/bin/env node\n\n${licenseText}\n\n/** do this */\nmodule.exports = function() {};`,
+      options: [ licensePath ]
+    },
+    {
+      code: `#!/usr/bin/env node\n\n${licenseText}\n\nmodule.exports = function() {};`,
+      options: [ licensePath ]
+    },
+    {
       code: `${licenseText}\n\nmodule.exports = function() {};`,
       options: [ licensePath ]
     },
@@ -330,6 +342,54 @@ ruleTester.run('header', rule, {
           message: 'Invalid license header',
           line: 4,
           column: 1
+        }
+      ]
+    },
+    {
+      code: '#!/usr/bin/env node\n\nmodule.exports = function() {};',
+      output:`#!/usr/bin/env node\n\n${licenseText}\n\nmodule.exports = function() {};`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Missing license header',
+          line: 1,
+          column: 1
+        }
+      ]
+    },
+    {
+      code: `#!/usr/bin/env node\n\n\n${licenseText}\n\nmodule.exports = function() {};`,
+      output:`#!/usr/bin/env node\n\n${licenseText}\n\nmodule.exports = function() {};`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Superfluous new lines before license header',
+          line: 4,
+          column: 1
+        }
+      ]
+    },
+    {
+      code: `#!/usr/bin/env node\n\n\n${licenseText}\n\n/** do this */\nmodule.exports = function() {};`,
+      output:`#!/usr/bin/env node\n\n${licenseText}\n\n/** do this */\nmodule.exports = function() {};`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Superfluous new lines before license header',
+          line: 4,
+          column: 1
+        }
+      ]
+    },
+    {
+      code: `#!/usr/bin/env node\n\n${licenseText}\n/** do this */\nmodule.exports = function() {};`,
+      output:`#!/usr/bin/env node\n\n${licenseText}\n\n/** do this */\nmodule.exports = function() {};`,
+      options: [ licensePath ],
+      errors: [
+        {
+          message: 'Missing new line after license header',
+          line: 8,
+          column: 4
         }
       ]
     },
